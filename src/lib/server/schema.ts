@@ -1,5 +1,14 @@
 import { relations } from 'drizzle-orm';
-import { decimal, integer, pgEnum, pgTable, serial, timestamp, varchar } from 'drizzle-orm/pg-core';
+import {
+	decimal,
+	integer,
+	pgEnum,
+	pgTable,
+	serial,
+	text,
+	timestamp,
+	varchar
+} from 'drizzle-orm/pg-core';
 
 export const user = pgTable('users', {
 	id: serial('id').primaryKey(),
@@ -37,7 +46,16 @@ export const transaction = pgTable('transactions', {
 	description: varchar('description', { length: 255 }),
 	createdAt: timestamp('created_at').notNull().defaultNow()
 });
-
+export const sessionTable = pgTable('session', {
+	id: text('id').primaryKey(),
+	userId: integer('user_id')
+		.notNull()
+		.references(() => user.id),
+	expiresAt: timestamp('expires_at', {
+		withTimezone: true,
+		mode: 'date'
+	}).notNull()
+});
 export const budget = pgTable('budgets', {
 	id: serial('id').primaryKey(),
 	user_id: integer('user_id').references(() => user.id),
