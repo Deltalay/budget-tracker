@@ -12,8 +12,8 @@ import {
 
 export const user = pgTable('users', {
 	id: serial('id').primaryKey(),
-	name: varchar('name', { length: 256 }).notNull().unique(),
-	password: varchar('password').notNull(),
+	username: varchar('name', { length: 256 }).notNull().unique(),
+	password_hash: varchar('password').notNull(),
 	updatedAt: timestamp('updated_at')
 		.notNull()
 		.$onUpdate(() => new Date()),

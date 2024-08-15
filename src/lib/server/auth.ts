@@ -8,7 +8,13 @@ export const lucia = new Lucia(adapter, {
 	sessionCookie: {
 		attributes: {
 			// set to `true` when using HTTPS
-			secure: !dev
+			secure: !dev,
+			sameSite: 'lax',
+		}
+	},
+	getUserAttributes: (attributes) => {
+		return {
+			username: attributes.username
 		}
 	}
 });
@@ -16,5 +22,9 @@ declare module 'lucia' {
 	interface Register {
 		Lucia: typeof lucia;
 		UserId: number;
+		DatabaseUserAttributes: DatabaseUserAttributes
 	}
+}
+interface DatabaseUserAttributes {
+	username: string;
 }
