@@ -7,62 +7,87 @@
 <svelte:head>
 	<title>Dashboard</title>
 </svelte:head>
-<header>
-	<nav>
-		<ul class="ulcontainer">
-			<li class="logo">BUDGET TRACKER</li>
-			<li class="welcome">Welcome back, {data.username}</li>
-		</ul>
-	</nav>
-</header>
-<div></div>
-<slot />
+<div style="display: flex;">
+	<aside class="sidebar">
+		<div class="logo">
+			<a href="/dashboard">BUDGET TRACKER</a>
+		</div>
+		<nav>
+			<ul class="nav-links">
+				<li><a href="/dashboard">Dashboard</a></li>
+				<li><a href="/transactions">Transactions</a></li>
+				<li><a href="/budgets">Budgets</a></li>
+				<li><a href="/goals">Goals</a></li>
+				<li><a href="/subscription">Subscription</a></li>
+			</ul>
+		</nav>
+		<div class="welcome" id="welcome-message">
+			Welcome back, {data.username}
+		</div>
+	</aside>
+	<slot />
+</div>
 
 <style>
-	ul {
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
-	}
-
-	header {
+	.sidebar {
+		width: 250px;
 		background-color: #702963;
-		color: #fff;
-		padding: 10px 20px;
-		border-bottom: 2px solid hsl(311, 46%, 27%);
-	}
-
-	nav ul.ulcontainer {
+		color: #ecf0f1;
+		height: 100vh;
+		position: fi;
+		padding: 20px;
+		box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 		display: flex;
+		flex-direction: column;
+		box-sizing: border-box;
 		justify-content: space-between;
-		align-items: center;
-		list-style: none;
 	}
 
-	nav ul.ulcontainer li {
-		font-size: 18px;
-		padding: 5px 10px;
-	}
-
-	nav ul.ulcontainer li.logo {
+	.sidebar .logo {
+		font-size: 24px;
 		font-weight: bold;
-		font-size: 22px;
+		margin-bottom: 30px;
 	}
 
-	nav ul.ulcontainer li.welcome {
-		font-style: italic;
+	.sidebar .logo a {
+		color: #ecf0f1;
+		text-decoration: none;
 	}
 
-	/* Add some responsive design */
-	@media (max-width: 768px) {
-		nav ul.ulcontainer {
-			flex-direction: column;
-			align-items: flex-start;
-		}
+	.sidebar nav {
+		flex-grow: 1;
+	}
 
-		nav ul.ulcontainer li {
-			font-size: 16px;
-			padding: 10px 0;
-		}
+	.sidebar .nav-links {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.sidebar .nav-links li {
+		margin: 15px 0;
+	}
+
+	.sidebar .nav-links li a {
+		color: #ecf0f1;
+		text-decoration: none;
+		font-size: 18px;
+		display: block;
+		transition: color 0.3s ease;
+	}
+
+	.sidebar .nav-links li a:hover {
+		color: #d1a3d1;
+	}
+
+	.sidebar .nav-links li a.active {
+		color: #d1a3d1;
+	}
+
+	.sidebar .welcome {
+		margin-top: auto;
+		font-size: 16px;
+		padding-top: 20px;
+		border-top: 1px solid #874b89;
 	}
 </style>
