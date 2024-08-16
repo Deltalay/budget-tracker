@@ -1,41 +1,69 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import Header from '$lib/header.svelte';
+	import type { ActionData } from './$types';
+	export let form: ActionData;
 </script>
 
 <Header></Header>
 
 <div class="container">
-  <div class="form-container">
-    <h1>Create Account</h1>
-    <form method="post" use:enhance>
-      <div class="form-group">
-        <label for="username">Name</label>
-        <input type="text" id="username" name="username" required />
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" required />
-      </div>
-      <div class="form-group">
-        <label for="confirm-password">Confirm Password</label>
-        <input type="password" id="confirm-password" required />
-      </div>
-      <div class="form-group">
-        <button type="submit">Create Account</button>
-      </div>
-    </form>
-  </div>
+	<div class="form-container">
+		<h1>Create Account</h1>
+		<form method="post" use:enhance>
+			<div class="form-group">
+				<label for="username">Name</label>
+				<input type="text" id="username" name="username" required />
+				{#if form?.username}
+					<p class="error">{form?.username}</p>
+				{/if}{#if form?.message}
+					<p class="error">{form?.message}</p>
+				{/if}
+			</div>
+			<div class="form-group">
+				<label for="password">Password</label>
+				<input type="password" id="password" name="password" required />
+				{#if form?.password}
+					<p class="error">{form?.password}</p>
+				{/if}
+				{#if form?.confirm}
+					<p class="error">{form?.confirm}</p>
+				{/if}
+			</div>
+			<div class="form-group">
+				<label for="confirm-password">Confirm Password</label>
+				<input type="password" id="confirm-password" name="confirm-password" required />
+				{#if form?.confirm}
+					<p class="error">{form?.confirm}</p>
+				{/if}
+			</div>
+				<div class="link-container">
+				<a href="/">Login instead?</a>
+			</div>
+			<div class="form-group">
+				<button type="submit">Create Account</button>
+			</div>
+		</form>
+	</div>
 </div>
 
 <style>
-  .container {
-    position: absolute;
-    width: 100%;
-      top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  }
+	.container {
+		position: absolute;
+		width: 100%;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+		.link-container {
+		display: flex;
+		flex-direction: row-reverse;
+    padding-bottom: 4px;
+	}
+	.link-container > a {
+		text-decoration: none;
+		color: black;
+	}
 	.form-container {
 		max-width: 500px;
 		width: auto;
@@ -91,11 +119,11 @@
 		border-radius: 4px;
 		font-size: 1em;
 		cursor: pointer;
-    font-weight: 600;
+		font-weight: 600;
 	}
 
 	.form-group button:hover {
-		background-color:#4a1b3c;
+		background-color: #4a1b3c;
 	}
 
 	@media (max-width: 600px) {

@@ -11,6 +11,7 @@ export const actions: Actions = {
 		const formData = await event.request.formData();
 		const username = formData.get('username');
 		const password = formData.get('password');
+		const conpassword = formData.get("confirm-password");
 		if (
 			typeof username !== 'string' ||
 			username.length < 3 ||
@@ -18,13 +19,18 @@ export const actions: Actions = {
 			!/^[a-z0-9_-]+$/.test(username)
 		) {
 			return fail(400, {
-				message: 'Invalid username'
+				username: 'Invalid username'
 			});
 		}
 		if (typeof password !== 'string' || password.length < 6 || password.length > 255) {
 			return fail(400, {
-				message: 'Invalid password'
+				password: 'Invalid password'
 			});
+		}
+		if (password != conpassword) {
+			return fail(400, {
+				confirm: "Password not match"
+			})
 		}
 		const passwordHash = await hash(password, {
 			// recommended minimum parameters
