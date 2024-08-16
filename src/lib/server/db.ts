@@ -1,6 +1,7 @@
 import { env } from '$env/dynamic/private';
 import { drizzle } from 'drizzle-orm/node-postgres';
-import { Client } from 'pg';
+import pkg from 'pg';
+const{Client} = pkg;
 const client = new Client({
 	connectionString: env.DB_STRING
 });
