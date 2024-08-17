@@ -15,25 +15,34 @@
 		<nav>
 			<ul class="nav-links">
 				<li><a href="/dashboard">Dashboard</a></li>
-				<li><a href="/transactions">Transactions</a></li>
-				<li><a href="/budgets">Budgets</a></li>
-				<li><a href="/goals">Goals</a></li>
-				<li><a href="/subscription">Subscription</a></li>
+				<li><a href="/dashboard/transactions">Transactions</a></li>
+				<li><a href="/dashboard/budgets">Budgets</a></li>
+				<li><a href="/dashboard/goals">Goals</a></li>
+				<li><a href="/dashboard/subscription">Subscription</a></li>
+				<li><a href="/dashboard/edit">Edit</a></li>
 			</ul>
 		</nav>
 		<div class="welcome" id="welcome-message">
 			Welcome back, {data.username}
 		</div>
 	</aside>
-	<slot />
+	<div class="slot">
+		<slot />
+	</div>
 </div>
 
 <style>
+	.slot {
+		padding: 1rem 2rem;
+		width: 100%;
+		background-color: #ecf0f1;
+	}
 	.sidebar {
 		width: 250px;
 		background-color: #702963;
 		color: #ecf0f1;
 		height: 100vh;
+		min-width: 250px;
 		position: fi;
 		padding: 20px;
 		box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);

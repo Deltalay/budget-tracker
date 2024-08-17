@@ -30,7 +30,6 @@ export const actions: Actions = {
 		const [searchUser] = await db.select().from(user).where(eq(user.username, username)).limit(1);
 		if (searchUser == undefined) {
 			await hash(password, {
-				// recommended minimum parameters
 				memoryCost: 19456,
 				timeCost: 2,
 				outputLen: 32,
