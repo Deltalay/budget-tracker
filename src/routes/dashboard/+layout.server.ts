@@ -1,5 +1,6 @@
-import { redirect } from '@sveltejs/kit';
+import { fail, redirect } from '@sveltejs/kit';
 import type { LayoutServerLoad } from './$types';
+import { lucia } from '$lib/server/auth';
 
 export const load: LayoutServerLoad = async (event) => {
 	if (!event.locals.user) {
